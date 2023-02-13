@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 import cors from "cors";
 import {
   registerValidation,
@@ -10,9 +11,10 @@ import checkAuth from "./utils/checkAuth.js";
 import { handleValidationErrors } from "./utils/handleValidationErrors.js";
 import { UserController, TaskController } from "./controllers/index.js";
 
+dotenv.config();
 mongoose
   .connect(
-    "mongodb+srv://dbSemaru:Semaru120399@cluster0.xv78ayw.mongodb.net/diary?retryWrites=true&w=majority",
+    `mongodb+srv://db${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.xv78ayw.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("DB OK"))
