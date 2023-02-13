@@ -58,7 +58,7 @@ app.patch("/tasks/isImportant", checkAuth, TaskController.updateIsImportant);
 //   TaskController.update
 // );
 
-app.listen(4444, (err) => {
+app.listen(process.env.PORT, (err) => {
   if (err) {
     return console.log(err);
   }
