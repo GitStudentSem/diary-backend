@@ -33,6 +33,7 @@ app.post(
 );
 app.post(
   "/auth/register",
+  cors(),
   registerValidation,
   handleValidationErrors,
   UserController.register
