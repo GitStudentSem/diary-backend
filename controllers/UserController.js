@@ -1,8 +1,9 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-
+import dotenv from "dotenv";
 import UserModel from "../models/User.js";
 
+dotenv.config();
 export const register = async (req, res) => {
   try {
     // Шифрование пароля
@@ -21,7 +22,7 @@ export const register = async (req, res) => {
     const user = await doc.save();
 
     // Создание токена
-    const token = jwt.sign({ _id: user._id }, "somthingSecretWord", {
+    const token = jwt.sign({ _id: user._id }, process.env.DB_SALT_WORD, {
       expiresIn: "30d",
     });
     const { passwordHash, ...userData } = user._doc;
