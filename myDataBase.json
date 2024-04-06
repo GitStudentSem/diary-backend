@@ -1,0 +1,38 @@
+{
+    "users": {
+        "purnemtzev.semen": {
+            "email": "purnemtzev.semen@yandex.ru",
+            "passwordHash": "$2b$10$25kZLK7q2ksVGUYzdQqFeukwccqO4RIdsSdEHc496kvdIQzhC0Ay2",
+            "_id": "60337fa6-91ab-4f09-bcd4-b4af15c37028",
+            "tasks": {
+                "ticketOne": {
+                    "answers": [
+                        {
+                            "answer": 4
+                        },
+                        {
+                            "answer": 1
+                        }
+                    ]
+                }
+            }
+        },
+        "purnemtdzev.semen": {
+            "email": "purnemtdzev.semen@yandex.ru",
+            "passwordHash": "$2b$10$39y77BxKwkBv/yMhOPeqeuRvYsRnvmCULkPUOnBscYS9vMkhOkGtK",
+            "_id": "829e6895-b784-43da-b102-8ff0bfd5da96",
+            "tasks": {
+                "ticketOne": {
+                    "answers": [
+                        {
+                            "answer": 6
+                        },
+                        {
+                            "answer": 3
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
