@@ -6,7 +6,7 @@ import { db } from "../index.js";
 
 export const register = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, fullName } = req.body;
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
 
@@ -22,11 +22,11 @@ export const register = async (req, res) => {
       return;
     }
 
-    await db.push(filePath, { email, passwordHash: hash, _id });
+    await db.push(filePath, { fullName, email, passwordHash: hash, _id });
 
     const user = await db.getData(filePath);
     const userCopy = { ...user };
-    delete userCopy.passwordHash;
+    userCopy.passwordHash = undefined;
 
     const token = jwt.sign({ _id: userCopy._id }, "somthingStrangeString", {
       expiresIn: "30d",
@@ -42,7 +42,6 @@ export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const filePath = getUserFilePath(email);
-
     const isExistUser = await db.exists(filePath);
 
     if (!isExistUser) {
@@ -59,7 +58,7 @@ export const login = async (req, res) => {
     }
 
     const userCopy = { ...user };
-    delete userCopy.passwordHash;
+    userCopy.passwordHash = undefined;
 
     const token = jwt.sign({ _id: user._id }, "somthingStrangeString", {
       expiresIn: "30d",
@@ -77,7 +76,7 @@ export const getMe = async (req, res) => {
     if (!user) return;
 
     const userCopy = { ...user };
-    delete userCopy.passwordHash;
+    userCopy.passwordHash = undefined;
 
     res.json({ ...userCopy });
   } catch (error) {
