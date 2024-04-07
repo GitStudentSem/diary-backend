@@ -26,10 +26,17 @@ export const isUserExist = async (req, res) => {
 };
 
 export const findUserById = (users, id) => {
-  for (let key in users) {
+  for (const key in users) {
     if (users[key]._id === id) {
       return users[key];
     }
   }
   return null;
+};
+
+export const formatDateToString = (dateString) => {
+  if (dateString === "other") return dateString;
+
+  const date = new Date(dateString);
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 };
