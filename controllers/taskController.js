@@ -12,10 +12,9 @@ export const add = async (req, res) => {
     if (!user) return;
 
     const filePath = getUserFilePath(user.email);
-    const { text, isImportant, dateKey } = req.body;
+    const { text, isImportant, dateKey, id } = req.body;
 
     const path = `${filePath}/tasks/${dateKey}`;
-    const id = `${dateKey}_${text}_${Math.random()}`;
 
     const isExistTasks = await db.exists(path);
 
