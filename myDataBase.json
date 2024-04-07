@@ -1,20 +1,11 @@
 {
-  "users": {
-    "purnemtzev.semen@yandex.ru": {
-      "fullName": "adsssssss",
-      "email": "purnemtzev.semen@yandex.ru",
-      "passwordHash": "$2b$10$5w1Q0Y2jFBQQkyizr70itufZpkZin4kI18mMEwK5EfeJpyZwVx/tq",
-      "_id": "d3cccefb-a21e-4c1d-8a0a-2c9c7481f9cd",
-      "tasks": {
-        "Apr 06 2024": [
-          {
-            "text": "123",
-            "isImportant": false,
-            "id": "Apr 06 2024_123_0.4824363719540117",
-            "dateKey": "Apr 06 2024"
-          }
-        ]
-      }
+    "users": {
+        "purnemtzev.semen@yandex.ru": {
+            "fullName": "adsssssss",
+            "email": "purnemtzev.semen@yandex.ru",
+            "passwordHash": "$2b$10$5w1Q0Y2jFBQQkyizr70itufZpkZin4kI18mMEwK5EfeJpyZwVx/tq",
+            "_id": "d3cccefb-a21e-4c1d-8a0a-2c9c7481f9cd",
+            "tasks": {}
+        }
     }
-  }
 }

@@ -22,9 +22,9 @@ export const add = async (req, res) => {
     if (isExistTasks) {
       const tasksOnDay = await db.getData(path);
 
-      await db.push(path, [...tasksOnDay, { text, isImportant, id, dateKey }]);
+      await db.push(path, [...tasksOnDay, { text, isImportant, id }]);
     } else {
-      await db.push(path, [{ text, isImportant, id, dateKey }]);
+      await db.push(path, [{ text, isImportant, id }]);
     }
 
     res.json(await db.getData(path));
@@ -87,7 +87,15 @@ export const deleteTask = async (req, res) => {
     sendError({ message: "Не удалось удалить задачу", error, res });
   }
 };
+function intersection(arr1, arr2) {
+  const result = [];
+  for (const number of arr2) {
+    if (arr1.indexOf(number) >= 0) result.push(number);
+  }
 
+  return result;
+}
+intersection([1, 2, 3, 4], [1, 2, 3, 4, 5, 6]);
 export const getAll = async (req, res) => {
   try {
     const user = await isUserExist(req, res);
@@ -101,11 +109,7 @@ export const getAll = async (req, res) => {
     if (!isExistTasks) return res.json([]);
 
     const allTasks = await db.getData(path);
-    const tasksToSend = [];
-    for (const key in allTasks) {
-      tasksToSend.push(...allTasks[key]);
-    }
-    res.json(tasksToSend);
+    res.json(allTasks);
   } catch (error) {
     sendError({ message: "Не удалось получить результаты", error, res });
   }
