@@ -1,9 +1,4 @@
-import {
-  formatDateToString,
-  getUserFilePath,
-  isUserExist,
-  sendError,
-} from "../assets.js";
+import { getUserFilePath, isUserExist, sendError } from "../assets.js";
 import { db } from "../index.js";
 
 export const add = async (req, res) => {
@@ -86,15 +81,7 @@ export const deleteTask = async (req, res) => {
     sendError({ message: "Не удалось удалить задачу", error, res });
   }
 };
-function intersection(arr1, arr2) {
-  const result = [];
-  for (const number of arr2) {
-    if (arr1.indexOf(number) >= 0) result.push(number);
-  }
 
-  return result;
-}
-intersection([1, 2, 3, 4], [1, 2, 3, 4, 5, 6]);
 export const getAll = async (req, res) => {
   try {
     const user = await isUserExist(req, res);
@@ -112,13 +99,6 @@ export const getAll = async (req, res) => {
   } catch (error) {
     sendError({ message: "Не удалось получить результаты", error, res });
   }
-};
-const a = {
-  "24-3-7": [{ text: 123, isImportant: false, id: "12345" }],
-  "24-3-8": [
-    { text: "somtehing else", isImportant: false, id: "12346" },
-    { text: "somtehing else 2", isImportant: true, id: "12347" },
-  ],
 };
 //////////////////////////////
 // export const send = async (req, res) => {

@@ -33,10 +33,3 @@ export const findUserById = (users, id) => {
   }
   return null;
 };
-
-export const formatDateToString = (dateString) => {
-  if (dateString === "other") return dateString;
-
-  const date = new Date(dateString);
-  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-};
