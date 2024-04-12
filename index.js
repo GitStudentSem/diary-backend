@@ -24,7 +24,7 @@ const corsOptions = {
 		}
 	},
 };
-app.use(cors(corsOptions));
+app.use(cors(["http://localhost", "https://your-gh-pages-url"]));
 app.use(express.json());
 export const db = new JsonDB(new Config("myDataBase", true, true, "/"));
 
