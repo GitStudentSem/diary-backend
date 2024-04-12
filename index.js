@@ -2,9 +2,9 @@ import express from "express";
 import cors from "cors";
 
 import {
-  loginValidation,
-  registerValidation,
-  taskValidation,
+	loginValidation,
+	registerValidation,
+	taskValidation,
 } from "./validations.js";
 
 import { checkAuth, handleValudationErrors } from "./midlewares.js";
@@ -14,21 +14,31 @@ import * as userController from "./controllers/userController.js";
 import * as taskController from "./controllers/taskController.js";
 
 const app = express();
-app.use(cors());
+const whitelist = ["http://localhost", "https://your-gh-pages-url"];
+const corsOptions = {
+	origin: (origin, callback) => {
+		if (whitelist.includes(origin)) {
+			callback(null, true);
+		} else {
+			callback(new Error("Not allowed by CORS"));
+		}
+	},
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 export const db = new JsonDB(new Config("myDataBase", true, true, "/"));
 
 app.post(
-  "/auth/register",
-  registerValidation,
-  handleValudationErrors,
-  userController.register
+	"/auth/register",
+	registerValidation,
+	handleValudationErrors,
+	userController.register,
 );
 app.post(
-  "/auth/login",
-  loginValidation,
-  handleValudationErrors,
-  userController.login
+	"/auth/login",
+	loginValidation,
+	handleValudationErrors,
+	userController.login,
 );
 app.get("/auth/me", checkAuth, userController.getMe);
 
@@ -50,8 +60,8 @@ app.get("/tasks/all", checkAuth, taskController.getAll);
 // app.delete("/tasks", checkAuth, taskController.remove);
 
 app.listen(3333, (err) => {
-  if (err) {
-    return console.log("Ошибка запуска сервера", err);
-  }
-  console.log("Server OK");
+	if (err) {
+		return console.log("Ошибка запуска сервера", err);
+	}
+	console.log("Server OK");
 });
