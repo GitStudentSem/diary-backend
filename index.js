@@ -14,7 +14,11 @@ import * as userController from "./controllers/userController.js";
 import * as taskController from "./controllers/taskController.js";
 
 const app = express();
-const whitelist = ["http://localhost", "https://your-gh-pages-url"];
+const whitelist = [
+	"http://localhost:5173",
+	"http://127.0.0.1:5173",
+	"https://your-gh-pages-url",
+];
 const corsOptions = {
 	origin: (origin, callback) => {
 		if (whitelist.includes(origin)) {
@@ -47,17 +51,9 @@ app.patch("/tasks/isImportant", checkAuth, taskController.setImportant);
 app.patch("/tasks/delete", checkAuth, taskController.deleteTask);
 app.get("/tasks/all", checkAuth, taskController.getAll);
 
-// app.post(
-//   "/tasks/:ticket",
-//   checkAuth,
-//   taskValidation,
-//   handleValudationErrors,
-//   taskController.send
-// );
-// app.get("/tasks", checkAuth, taskController.getAll);
-// app.get("/tasks/:ticket", checkAuth, taskController.getOne);
-// app.delete("/tasks/:ticket", checkAuth, taskController.removeOne);
-// app.delete("/tasks", checkAuth, taskController.remove);
+app.get("/check", (req, res) => {
+	res.json("Запрос прошел");
+});
 
 app.listen(3333, (err) => {
 	if (err) {
