@@ -50,7 +50,7 @@ app.post(
 	handleValudationErrors,
 	userController.login,
 );
-app.get("/auth/me", checkAuth, userController.getMe);
+app.get("/auth/me", cors(), checkAuth, userController.getMe);
 
 app.post("/tasks/add", checkAuth, taskController.add);
 app.patch("/tasks/isImportant", checkAuth, taskController.setImportant);
