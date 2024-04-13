@@ -21,21 +21,20 @@ const whitelist = [
 ];
 const corsOptions = {
 	origin: (origin, callback) => {
-		if (whitelist.includes(origin)) {
+		if (
+			origin &&
+			(whitelist.includes(origin) || process.env.NODE_ENV === "development")
+		) {
 			callback(null, true);
 		} else {
 			callback(new Error("Not allowed by CORS"));
 		}
 	},
 };
+
 app.use(cors(corsOptions));
+
 app.use(express.json());
-app.use((req, res, next) => {
-	res.header("Access-Control-Allow-Origin", "http://localhost:5173");
-	res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH");
-	res.header("Access-Control-Allow-Headers", "Content-Type");
-	next();
-});
 
 export const db = new JsonDB(new Config("myDataBase", true, true, "/"));
 
@@ -51,6 +50,13 @@ app.post(
 	handleValudationErrors,
 	userController.login,
 );
+
+app.options("/auth/me", (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*"); // Можете указать конкретный источник вместо звездочки
+	res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
+	res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+	res.sendStatus(200);
+});
 app.get("/auth/me", checkAuth, userController.getMe);
 
 app.post("/tasks/add", checkAuth, taskController.add);
