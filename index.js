@@ -50,13 +50,6 @@ app.post(
 	handleValudationErrors,
 	userController.login,
 );
-
-app.options("/auth/me", (req, res) => {
-	res.header("Access-Control-Allow-Origin", "*"); // Можете указать конкретный источник вместо звездочки
-	res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
-	res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-	res.sendStatus(200);
-});
 app.get("/auth/me", checkAuth, userController.getMe);
 
 app.post("/tasks/add", checkAuth, taskController.add);
