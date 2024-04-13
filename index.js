@@ -19,18 +19,6 @@ const whitelist = [
 	"http://127.0.0.1:5173",
 	"https://your-gh-pages-url",
 ];
-// const corsOptions = {
-// 	origin: (origin, callback) => {
-// 		if (
-// 			origin &&
-// 			(whitelist.includes(origin) || process.env.NODE_ENV === "development")
-// 		) {
-// 			callback(null, true);
-// 		} else {
-// 			callback(new Error("Not allowed by CORS"));
-// 		}
-// 	},
-// };
 
 app.use(cors({ origin: whitelist }));
 
