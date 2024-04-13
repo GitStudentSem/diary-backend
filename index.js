@@ -17,7 +17,7 @@ const app = express();
 const whitelist = [
 	"http://localhost:5173",
 	"http://127.0.0.1:5173",
-	"https://your-gh-pages-url",
+	"https://gitstudentsem.github.io",
 ];
 
 app.use(cors({ origin: whitelist }));
